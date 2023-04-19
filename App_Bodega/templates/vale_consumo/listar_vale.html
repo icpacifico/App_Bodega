@@ -1,0 +1,55 @@
+{% extends "pages/base.html" %}
+{% load static%}
+{% block contenido%}
+<div class="body flex-grow-1 px-3">
+  <div class="container-lg">
+<div class="car"></div>
+<div class="card mb-4">
+  <div class="card-header"><strong>Vales de consumos:</strong><span class="small ms-1">Vales pendientes {{user.username}}</span></div>
+  <div class="card-body">
+    <div class="example">
+      <ul class="nav nav-tabs" role="tablist">
+      </ul>
+      <div class="tab-content rounded-bottom">
+        <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-494">
+          {% if solicitudes %}
+          <table class="table">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">N° Vale</th>
+                <th scope="col">Solicitante</th>
+                <th scope="col">Fecha Solicitud</th>
+                <th scope="col">Uni. Negocio</th>
+                <th scope="col">Centro de Cst</th>
+                <th scope="col">Piso</th>
+                <th scope="col">Estado Solicitud</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for solicitud in solicitudes %}
+                {% if user.id == solicitud.solicitante.id %}
+                    <tr>
+                      <th>{{solicitud.id_solicitud}}</th>
+                      <td>{{solicitud.solicitante}}</td>
+                      <td>{{solicitud.fecha_solicitud}}</td>
+                      <td>{{solicitud.unidad_negocio}}</td>
+                      <td>{{solicitud.id_centro_costo}}</td>
+                      <td>{{solicitud.piso}}</td>
+                      <td>{{solicitud.estado_solicitud}}</td>
+                    </tr>
+                {% endif %}
+              {% endfor %}
+            </tbody>
+          </table>
+          {% else %}
+          <h1>No tienes vales pendientes</h1>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+{%endblock contenido%}

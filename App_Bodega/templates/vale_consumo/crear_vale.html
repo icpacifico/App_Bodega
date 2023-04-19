@@ -1,0 +1,167 @@
+{% extends "pages/base.html" %}
+{% load static%}
+{% block head %}
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
+<meta name="author" content="Łukasz Holeczek">
+<meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
+<title>{% block titulo %}Gest Bodega{% endblock titulo %}</title>
+
+<link rel="stylesheet" href="{% static 'datatables-1.10.20/css/dataTables.bootstrap4.min.css' %}"/>
+<link rel="stylesheet" href="{% static 'datatables-1.10.20/plugins/responsive-2.2.3/css/responsive.bootstrap4.min.css' %}"/>
+<script src="{% static 'datatables-1.10.20/js/jquery.dataTables.js' %}"></script>
+<script src="{% static 'datatables-1.10.20/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'datatables-1.10.20/plugins/responsive-2.2.3/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'datatables-1.10.20/plugins/responsive-2.2.3/js/responsive.bootstrap4.min.js' %}"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'vale_consumo/form.js' %}"></script>
+<script src="{% static 'vale_consumo/functions.js' %}"></script>
+<link href="{% static 'jquery-ui-1.12.1/jquery-ui.min.css' %}" rel="stylesheet"/>
+<script src="{% static 'jquery-ui-1.12.1/jquery-ui.min.js' %}"></script>
+<link href="{% static 'select2-4.0.13/css/select2.min.css' %}" rel="stylesheet"/>
+<link href="{% static 'select2-4.0.13/css/select2-bootstrap4.min.css' %}" rel="stylesheet"/>
+<script src="{% static 'select2-4.0.13/js/select2.min.js' %}"></script>
+<script src="{% static 'select2-4.0.13/js/i18n/es.js' %}"></script>
+
+
+<link href="{% static 'jquery-ui-1.12.1/jquery-ui.min.css' %}" rel="stylesheet"/>
+<script src="{% static 'jquery-ui-1.12.1/jquery-ui.min.js' %}"></script>
+
+<link href="{% static 'select2-4.0.13/css/select2.min.css' %}" rel="stylesheet"/>
+<link href="{% static 'select2-4.0.13/css/select2-bootstrap4.min.css' %}" rel="stylesheet"/>
+<script src="{% static 'select2-4.0.13/js/select2.min.js' %}"></script>
+<script src="{% static 'select2-4.0.13/js/i18n/es.js' %}"></script>
+
+<script src="{% static 'moment-2.25.3/moment-with-locales.js' %}"></script>
+<script src="{% static 'tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.js' %}"></script>
+<link href="{% static 'tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css' %}" rel="stylesheet"/>
+
+<link href="{% static 'bootstrap-touchspin-4.3.0/jquery.bootstrap-touchspin.css' %}" rel="stylesheet"/>
+<script src="{% static 'bootstrap-touchspin-4.3.0/jquery.bootstrap-touchspin.js' %}"></script>
+<!-- Jquery Confirm -->
+<link rel="stylesheet" href="{% static 'jquery-confirm-v3.3.4/jquery-confirm.min.css' %}">
+<script src="{% static 'jquery-confirm-v3.3.4/jquery-confirm.min.js' %}"></script>
+<link rel="manifest" href="{% static 'assets/favicon/manifest.json' %}">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="{% static 'assets/favicon/ms-icon-144x144.png' %}">
+<meta name="theme-color" content="#ffffff">
+<!-- Vendors styles-->
+<link rel="stylesheet" href="{% static 'vendors/simplebar/css/simplebar.css' %}">
+<link rel="stylesheet" href="{% static 'css/vendors/simplebar.css' %}">
+<!-- Main styles for this application-->
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
+<!-- We use those styles to show code examples, you should remove them in your application.-->
+<!-- Global site tag (gtag.js) - Google Analytics-->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-118965717-3"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+
+function gtag() {
+dataLayer.push(arguments);
+}
+gtag('js', new Date());
+// Shared ID
+gtag('config', 'UA-118965717-3');
+// Bootstrap ID
+gtag('config', 'UA-118965717-5');
+</script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<link href="{% static 'bootstrap-touchspin-4.3.0/jquery.bootstrap-touchspin.css' %}" rel="stylesheet"/>
+<script src="{% static 'bootstrap-touchspin-4.3.0/jquery.bootstrap-touchspin.js' %}"></script>
+
+
+
+{% endblock head %}
+{% block contenido%}
+<div class="body flex-grow-1 px-3">
+  <div class="container-lg">
+    <div class="row">
+      <div class="col-12">
+        <div class="card mb-4">
+          <div class="card-header"><strong>Forms layout</strong><span class="small ms-1">Gutters</span></div>
+          <div class="card-body">
+            <p class="text-medium-emphasis small">Hola</p>
+            <div class="example">
+              <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item"><a class="nav-link active" data-coreui-toggle="tab" href="#preview-267" role="tab">
+                    <svg class="icon me-2">
+                      <use xlink:href="{% static 'vendors/@coreui/icons/svg/free.svg#cil-media-play' %}"></use>
+                    </svg>Pedidos</a></li>
+              </ul>
+              <div class="tab-content rounded-bottom">
+                <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-267">
+                  <form method="post" class="row g-3">
+                    <input type="hidden" name="action" value="add">
+
+                    <div class="col-md-6">
+                      <label class="form-label">solicitante</label>
+                      {{form.solicitante}}
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label">fecha_solicitud</label>
+                      {{form.fecha_solicitud}}
+                    </div>
+                    <div class="col-md-4">
+                      <label class="form-label">unidad_negocio</label>
+                      {{form.unidad_negocio}}
+                    </div>
+                    <div class="col-md-4">
+                      <label class="form-label">centro_costo</label>
+                      {{form.id_centro_costo}}
+                    </div>
+                    <div class="col-md-4">
+                      <label class="form-label">piso</label>
+                      {{form.piso}}
+                    </div>                        
+                    <ul class="nav nav-tabs" role="tablist">
+                      <li class="nav-item"><a class="nav-link active" data-coreui-toggle="tab" href="#preview-719" role="tab">
+                          <svg class="icon me-2">
+                            <use xlink:href="{% static 'vendors/@coreui/icons/svg/free.svg#cil-media-play' %}"></use>
+                          </svg>Detalle de la solicitud</a></li>
+                    </ul>
+                    <div class="tab-content rounded-bottom">
+                      <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-719">
+                        
+                        <div class="form-group">
+                          <label>Buscador de productos</label>
+                          <div class="input-group">
+                              <input type="text" class="form-control" name="search"
+                                     placeholder="Ingrese una descripción de producto" autocomplete="off">
+                              <span class="input-group-append">
+                            </span>
+                          </div>
+                      </div>
+    
+                      <hr>
+                        <table class="table table-bordered" id="tblProducts">
+                          <thead>
+                          <tr>
+                              <th>Eliminar</th>
+                              <th>Recurso</th>
+                              <th>Cantidad</th>
+                          </tr>
+                          </thead> 
+                          <tbody>
+                          </tbody>
+                      </table>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      </div><button type="submit" class="btn btn-primary mr-2">Enviar Vale</button>
+                      <a href="{% url 'vale_consumo:listar_solicitud' %}" class="btn btn-dark">Cancelar Vale</a>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock contenido%}

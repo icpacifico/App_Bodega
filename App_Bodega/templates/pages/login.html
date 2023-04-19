@@ -1,0 +1,54 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<base href="./">
+<meta charset="utf-8">
+
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="theme-color" content="#ffffff">
+<!-- Main styles for this application-->
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+<body>
+  <div class="bg-light min-vh-100 d-flex flex-row align-items-center">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-4">
+          <div class="card mb-4 mx-4">
+            <form method="post">
+              {% csrf_token %}
+              <div class="card-body">
+                <h1>Inicio de sesión</h1>
+                <p class="text-medium-emphasis">Ingresa tu cuenta</p>
+
+                <div class="input-group mb-3"><span class="input-group-text">
+                  <svg class="icon">
+                    <use xlink:href="{% static 'vendors/@coreui/icons/svg/free.svg#cil-user' %}"></use>
+                  </svg></span>
+                  <input class="form-control" type="text" placeholder="Nombre de usuario" name="username">
+                </div>
+                <div class="input-group mb-4"><span class="input-group-text">
+                  <svg class="icon">
+                    <use xlink:href="{% static 'vendors/@coreui/icons/svg/free.svg#cil-lock-locked' %}"></use>
+                  </svg></span>
+                  <input class="form-control" type="password" placeholder="Constraseña" name="password">
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <button class="btn btn-primary px-4" type="submit">Ingresar</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- CoreUI and necessary plugins-->
+  <script src="{% static 'vendors/@coreui/coreui/js/coreui.bundle.min.js'%}"></script>
+  <script src="{% static 'vendors/simplebar/js/simplebar.min.js'%}"></script>
+  <script></script>
+</body>
+</html>
