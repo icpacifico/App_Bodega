@@ -117,16 +117,6 @@ ESTADOS_CHOICES = [(estado_1, 'Pendiente'),
                    (estado_4, 'Listo para entrega'), ]
 
 
-class Observacion(models.Model):
-    id_observacion = models.AutoField(primary_key=True)
-    observacion = models.CharField(max_length=100, blank=True, null=True)
-
-    def __str__(self):
-        return str(self.id_observacion) + " " + str(self.observacion)
-
-    def toJSON(self):
-        item = model_to_dict(self)
-        return item
 
 class Personal(models.Model):
     id_persona = models.CharField(primary_key=True, max_length=12)
@@ -157,7 +147,7 @@ class Solicitud(models.Model):
     preparador = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name="Preparador")
     bodega = models.ForeignKey(Bodega, on_delete=models.CASCADE, blank=True, null=True)
     estado_solicitud = models.CharField(max_length=50, blank=True, null=True, choices=ESTADOS_CHOICES, default=estado_1)
-    observacion = models.ForeignKey(Observacion, on_delete=models.CASCADE)
+    observacion = models.CharField(max_length=200, blank=True, null=True)
     is_active_solicitud = models.CharField(max_length=10, blank=True, null=True, choices=IS_ACTIVE_CHOICES,
                                            default=is_active)
 

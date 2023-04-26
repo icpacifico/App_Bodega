@@ -75,7 +75,6 @@ class CrearSolicitud(CreateView):
         except Exception as e:
             data['error'] = e
         return JsonResponse(data, safe=False)
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # context['title'] = 'Creación de una Venta'

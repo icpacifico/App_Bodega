@@ -1,7 +1,7 @@
 from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
-from .models import Unidad_Negocio, Centro_Costo, Bodega, Categoria, Recurso, Solicitud, Solicitud_Recurso, Observacion
+from .models import Unidad_Negocio, Centro_Costo, Bodega, Categoria, Recurso, Solicitud, Solicitud_Recurso
 from usuario.models import UserProfile  # Preparador,
 
 
@@ -160,4 +160,4 @@ admin.site.register(Categoria, CategoriaAdmin)
 admin.site.register(Recurso, RecursoAdmin)
 admin.site.register(Solicitud, SolicitudAdmin)
 admin.site.register(Solicitud_Recurso, Solicitud_RecursoAdmin)
-admin.site.register(Observacion)
+
