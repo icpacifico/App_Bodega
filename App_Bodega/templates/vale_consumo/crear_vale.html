@@ -9,7 +9,7 @@
 <meta name="author" content="Łukasz Holeczek">
 <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
 <title>{% block titulo %}Gest Bodega{% endblock titulo %}</title>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="{% static 'datatables-1.10.20/css/dataTables.bootstrap4.min.css' %}"/>
 <link rel="stylesheet" href="{% static 'datatables-1.10.20/plugins/responsive-2.2.3/css/responsive.bootstrap4.min.css' %}"/>
 <script src="{% static 'datatables-1.10.20/js/jquery.dataTables.js' %}"></script>
@@ -17,7 +17,7 @@
 <script src="{% static 'datatables-1.10.20/plugins/responsive-2.2.3/js/dataTables.responsive.min.js' %}"></script>
 <script src="{% static 'datatables-1.10.20/plugins/responsive-2.2.3/js/responsive.bootstrap4.min.js' %}"></script>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script src="{% static 'vale_consumo/form.js' %}"></script>
 <script src="{% static 'vale_consumo/functions.js' %}"></script>
 <link href="{% static 'jquery-ui-1.12.1/jquery-ui.min.css' %}" rel="stylesheet"/>
@@ -82,15 +82,14 @@ gtag('config', 'UA-118965717-5');
     <div class="row">
       <div class="col-12">
         <div class="card mb-4">
-          <div class="card-header"><strong>Forms layout</strong><span class="small ms-1">Gutters</span></div>
+          <div class="card-header"><strong>VALE DE CONSUMO:</strong><span class="small ms-1">Solicitudes</span></div>
           <div class="card-body">
-            <p class="text-medium-emphasis small">Hola</p>
             <div class="example">
               <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item"><a class="nav-link active" data-coreui-toggle="tab" href="#preview-267" role="tab">
                     <svg class="icon me-2">
                       <use xlink:href="{% static 'vendors/@coreui/icons/svg/free.svg#cil-media-play' %}"></use>
-                    </svg>Pedidos</a></li>
+                    </svg>Cabecera Solicitud</a></li>
               </ul>
               <div class="tab-content rounded-bottom">
                 <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-267">
@@ -98,30 +97,34 @@ gtag('config', 'UA-118965717-5');
                     <input type="hidden" name="action" value="add">
 
                     <div class="col-md-6">
-                      <label class="form-label">solicitante</label>
+                      <label class="form-label">Solicitante</label>
                       {{form.solicitante}}
                     </div>
                     <div class="col-md-6">
-                      <label class="form-label">fecha_solicitud</label>
+                      <label class="form-label">Fecha Solicitud</label>
                       {{form.fecha_solicitud}}
                     </div>
                     <div class="col-md-4">
-                      <label class="form-label">unidad_negocio</label>
+                      <label class="form-label">Unidad de Negocio</label>
                       {{form.unidad_negocio}}
                     </div>
                     <div class="col-md-4">
-                      <label class="form-label">centro_costo</label>
+                      <label class="form-label">Centro de Costo</label>
                       {{form.id_centro_costo}}
                     </div>
                     <div class="col-md-4">
-                      <label class="form-label">piso</label>
+                      <label class="form-label">Piso</label>
                       {{form.piso}}
-                    </div>                        
+                    </div>
+                     <div class="col-md-4">
+                      <label class="form-label">Retira</label>
+                      {{form.retira}}
+                    </div>
                     <ul class="nav nav-tabs" role="tablist">
                       <li class="nav-item"><a class="nav-link active" data-coreui-toggle="tab" href="#preview-719" role="tab">
                           <svg class="icon me-2">
                             <use xlink:href="{% static 'vendors/@coreui/icons/svg/free.svg#cil-media-play' %}"></use>
-                          </svg>Detalle de la solicitud</a></li>
+                          </svg>Detalle de Recursos</a></li>
                     </ul>
                     <div class="tab-content rounded-bottom">
                       <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-719">
@@ -150,10 +153,9 @@ gtag('config', 'UA-118965717-5');
                       </table>
                       </div>
                     </div>
-                    <div class="col-12">
-                      </div><button type="submit" class="btn btn-primary mr-2">Enviar Vale</button>
+
+                    <button type="submit" class="btn btn-primary mr-2">Enviar Vale</button>
                       <a href="{% url 'vale_consumo:listar_solicitud' %}" class="btn btn-dark">Cancelar Vale</a>
-                    </div>
                   </form>
                 </div>
               </div>
@@ -164,4 +166,29 @@ gtag('config', 'UA-118965717-5');
     </div>
   </div>
 </div>
+<script>
+    $(document).ready(function () {
+      // Maneja el cambio en el campo de selección de unidades de negocio
+      $("#id_unidad_negocio").change(function () {
+        var unidad_negocio_id = $(this).val();
+        // Realiza una solicitud AJAX para obtener los centros de costos relacionados con la unidad de negocio seleccionada
+        $.ajax({
+          url: "{% url 'get_centros_costos' %}",
+          data: { "unidad_negocio_id": unidad_negocio_id },
+          dataType: "json",
+          success: function (data) {
+            // Limpia el campo de selección de centros de costos y agrega las nuevas opciones
+            var $centro_costo_select = $("#id_id_centro_costo");
+            $centro_costo_select.empty();
+            $.each(data, function (index, centro_costo) {
+              $centro_costo_select.append('<option value="' + centro_costo.id + '">' + centro_costo.nombre_centro_costo + '</option>');
+            });
+          },
+          error: function (xhr, status, error) {
+            console.error("Error en la solicitud AJAX:", status, error);
+          }
+        });
+      });
+    });
+  </script>
 {%endblock contenido%}

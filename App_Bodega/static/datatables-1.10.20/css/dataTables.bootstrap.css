@@ -22,7 +22,7 @@ table.dataTable.nowrap td {
 div.dataTables_wrapper div.dataTables_length label {
   font-weight: normal;
   text-align: left;
-  white-space: nowrap;
+  white-space: normal;
 }
 div.dataTables_wrapper div.dataTables_length select {
   width: 75px;
@@ -43,7 +43,7 @@ div.dataTables_wrapper div.dataTables_filter input {
 }
 div.dataTables_wrapper div.dataTables_info {
   padding-top: 8px;
-  white-space: nowrap;
+  white-space: normal;
 }
 div.dataTables_wrapper div.dataTables_paginate {
   margin: 0;
