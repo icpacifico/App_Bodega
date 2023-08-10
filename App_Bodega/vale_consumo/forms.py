@@ -30,6 +30,11 @@ class SolicitudForm(ModelForm):
                     'type': 'number',
                     'min': 1,
                 }
+            ),
+            'retira': TextInput(
+                attrs={
+                    'class': 'form-control ',
+                }
             )
         }
 

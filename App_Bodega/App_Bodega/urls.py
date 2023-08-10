@@ -19,6 +19,7 @@ from django.urls import path, include
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from usuario.views import Login, Inicio, logoutUsuario
+from vale_consumo import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,4 +28,6 @@ urlpatterns = [
     # path('inicio', login_required(Inicio.as_view()), name="index"),
     path('accounts/login/', Login.as_view(), name='login'),
     path('logout/', login_required(logoutUsuario), name='logout'),
+    path('get_centros_costos/', views.get_centros_costos, name='get_centros_costos'),
+
 ]

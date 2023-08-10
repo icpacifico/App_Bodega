@@ -13,33 +13,31 @@
                     </ul>
                     <div class="tab-content rounded-bottom">
                         <div class="tab-pane p-3 active preview" role="tabpanel" id="preview-494">
-                            {% if solicitudes %}
+                            {% if detalles_recursos %}
                             <table class="table">
                                 <thead class="table-dark">
                                 <tr>
-                                    <th scope="col">N° Vale</th>
-                                    <th scope="col">Fecha Solicitud</th>
-                                    <th scope="col">Uni. Negocio</th>
-                                    <th scope="col">Estado Solicitud</th>
+                                    <th>Id Solicitud</th>
+                                    <th>Solicitante</th>
+                                    <th>Recurso</th>
+                                    <th>Cantidad Solicitada</th>
+                                    <th>Estado Despacho</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {% for solicitud in solicitudes %}
-                                {% if user.id == solicitud.solicitante.id %}
+                                {% for detalle in detalles_recursos %}
                                 <tr>
-                                    <th>
-                                        <a href="{% url 'vale_consumo:listar_detalle_solicitud' solicitud.id_solicitud %}">{{solicitud.id_solicitud}}</a>
-                                    </th>
-                                    <td>{{solicitud.fecha_solicitud}}</td>
-                                    <td>{{solicitud.unidad_negocio}}</td>
-                                    <td>{{solicitud.estado_solicitud}}</td>
+                                    <td>{{ detalle.id_solicitud_recurso }}</td>
+                                    <td>{{ detalle.id_solicitud }}</td>
+                                    <td>{{ detalle.id_recurso }}</td>
+                                    <td>{{ detalle.cantidad_solicitada }}</td>
+                                    <td>{{ detalle.estado_despacho }}</td>
                                 </tr>
-                                {% endif %}
                                 {% endfor %}
                                 </tbody>
                             </table>
                             {% else %}
-                            <h1>No tienes vales pendientes</h1>
+                            <h1>No existen solicitudes regitradas</h1>
                             {% endif %}
                             {% if is_paginated %}
                             <div class="">
@@ -56,7 +54,6 @@
                                     </li>
                                     {% endif %}
                                     {% for i in paginator.page_range %}
-
                                     <li class="page-item {% if page_obj.number == i  %} active {% endif %}">
                                         <a href="?page={{ i }}" class="page-link">{{ i }}</a>
                                     </li>
@@ -80,6 +77,6 @@
         </div>
     </div>
 </div>
+{%endblock contenido%}
 
-{%endblock%}
 

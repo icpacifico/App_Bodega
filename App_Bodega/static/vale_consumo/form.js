@@ -6,6 +6,7 @@ var vents = {
         id_centro_costo:'',
         unidad_negocio:'',
         piso:'',
+        retira:'',
         recursos: []
     },
     add: function (item) {
@@ -66,6 +67,7 @@ var vents = {
 };
 
 $(function () {
+    //##################################################################################################################
     // search products
 
     $('input[name="search"]').autocomplete({
@@ -90,7 +92,7 @@ $(function () {
         minLength: 1,
         select: function (event, ui) {
             event.preventDefault();
-            ui.item.cantidad_solicitada = 1;            
+            ui.item.cantidad_solicitada = 1;
             vents.items.recursos.push(ui.item);
             vents.list();
             $(this).val('');
@@ -106,22 +108,29 @@ $(function () {
             vents.items.recursos.splice(tr.row, 1);
             vents.list();
             //});
+        })
+        .on('change', 'input[name="cantidad_solicitada"]', function(){
+        console.clear();
+        var cant = parseInt($(this).val());
+        var tr = tblProducts.cell($(this).closest('td,li')).index();
+        vents.items.recursos[tr.row].cantidad_solicitada = cant;
         });
     // event submit
     $('form').on('submit', function (e) {
         e.preventDefault();
 
         vents.items.solicitante = $('select[name="solicitante"]').val();
-        vents.items.fecha_solicitud = $('input[name="fecha_solicitud"]').val();
         vents.items.id_centro_costo = $('select[name="id_centro_costo"]').val();
+        vents.items.fecha_solicitud = $('input[name="fecha_solicitud"]').val();
         vents.items.unidad_negocio = $('select[name="unidad_negocio"]').val();
         vents.items.piso = $('input[name="piso"]').val();
+        vents.items.retira = $('input[name="retira"]').val();
 
         var parameters = new FormData();
         parameters.append('action',$('input[name="action"]').val());
         parameters.append('vents', JSON.stringify(vents.items));
-        
-        submit_with_ajax(window.location.pathname, 'Notificación', '¿Estas seguro de realizar la siguiente acción?', parameters, function () {
+
+        submit_with_ajax(window.location.pathname, 'Stop!!', '¿Estas seguro de realizar la siguiente acción?', parameters, function () {
             location.href = "/vale_consumo/listar_solicitud/";
         });
     });

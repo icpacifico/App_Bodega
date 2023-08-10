@@ -117,7 +117,6 @@ ESTADOS_CHOICES = [(estado_1, 'Pendiente'),
                    (estado_4, 'Listo para entrega'), ]
 
 
-
 class Personal(models.Model):
     id_persona = models.CharField(primary_key=True, max_length=12)
     nombre1_personal = models.CharField(max_length=50, blank=True, null=True)
@@ -139,12 +138,13 @@ class Solicitud(models.Model):
     id_solicitud = models.AutoField(primary_key=True)
     solicitante = models.ForeignKey(User, on_delete=models.CASCADE)
     fecha_solicitud = models.DateField(blank=True, null=True)
-    hora_solicitud = models.TimeField(blank=True, null=True)
+    hora_solicitud = models.TimeField(auto_now_add=True, editable=False)
     unidad_negocio = models.ForeignKey(Unidad_Negocio, on_delete=models.CASCADE)
     id_centro_costo = models.ForeignKey(Centro_Costo, on_delete=models.CASCADE)
     # edificio = models.IntegerField()
     piso = models.IntegerField()
-    preparador = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name="Preparador")
+    retira = models.CharField(max_length=200, blank=False, null=False)
+    preparador = models.ForeignKey(Personal, on_delete=models.CASCADE, blank=True, null=True, related_name="Preparador")
     bodega = models.ForeignKey(Bodega, on_delete=models.CASCADE, blank=True, null=True)
     estado_solicitud = models.CharField(max_length=50, blank=True, null=True, choices=ESTADOS_CHOICES, default=estado_1)
     observacion = models.CharField(max_length=200, blank=True, null=True)
@@ -161,6 +161,7 @@ class Solicitud(models.Model):
         item['unidad_negocio'] = self.unidad_negocio.toJSON()
         item['id_centro_costo'] = self.id_centro_costo.toJSON()
         item['piso'] = self.piso.toJSON()
+        item['retira'] = self.retira.toJSON()
         item['preparador'] = self.preparador.toJSON()
         item['bodega'] = self.bodega.toJSON()
         item['estado_solicitud'] = self.estado_solicitud.toJSON()
@@ -174,10 +175,10 @@ class Solicitud(models.Model):
 
 
 # MODELO: SOLICITUD_RECURSO
-despacho_1 = 'No realizado'
+despacho_1 = 'Sin Stock'
 despacho_2 = 'Realizado'
 
-DESPACHO_CHOICES = [(despacho_1, 'No realizado'),
+DESPACHO_CHOICES = [(despacho_1, 'Sin Stock'),
                     (despacho_2, 'Realizado'), ]
 
 
