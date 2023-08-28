@@ -28,10 +28,10 @@ class Unidad_Negocio(models.Model):
 # MODELO: CENTRO DE COSTOS
 class Centro_Costo(models.Model):
     # id_centro_costo = models.AutoField(primary_key=True)
-    nombre_centro_costo = models.CharField(max_length=100, blank=False, null=False)
+    nombre_centro_costo = models.CharField(max_length=200, blank=False, null=False)
     crr = models.IntegerField(blank=False, null=False)
-    g_part = models.CharField(max_length=100, blank=False, null=False)
-    cc = models.CharField(max_length=100, blank=False, null=False)
+    g_part = models.CharField(max_length=200, blank=False, null=False)
+    cc = models.CharField(max_length=200, blank=False, null=False)
     comentario = models.CharField(max_length=100, blank=False, null=False)
     is_active_centro_costo = models.CharField(max_length=10, blank=False, null=False, choices=IS_ACTIVE_CHOICES,
                                               default=is_active)
@@ -75,21 +75,21 @@ class Categoria(models.Model):
         verbose_name_plural = "Categorías"
 
 
+
+# MODELO:Unidades de medida
+class Unidade(models.Model):
+    nombre_unidad = models.CharField(max_length=30, blank=False, null=False)
+    abrv = models.CharField(max_length=10, blank=False, null=False)
+
+    def __str__(self):
+        return self.abrv
+
 # MODELO:RECURSO
-unidad_1 = 'Unidad 1'
-unidad_2 = 'Unidad 2'
-unidad_3 = 'Unidad 3'
-
-UNIDADES_CHOICES = [(unidad_1, 'Unidad 1'),
-                    (unidad_2, 'Unidad 2'),
-                    (unidad_3, 'Unidad 3'), ]
-
-
 class Recurso(models.Model):
     # id_recurso = models.AutoField(primary_key=True)
     categoria_recurso = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     nombre_recurso = models.CharField(max_length=100, blank=False, null=False)
-    unidad = models.CharField(max_length=10, blank=False, null=False, choices=UNIDADES_CHOICES, default=unidad_1)
+    unidad = models.ForeignKey(Unidade, on_delete=models.CASCADE)
     is_active_recurso = models.CharField(max_length=10, blank=False, null=False, choices=IS_ACTIVE_CHOICES,
                                          default=is_active)
 
@@ -143,7 +143,7 @@ class Solicitud(models.Model):
     id_centro_costo = models.ForeignKey(Centro_Costo, on_delete=models.CASCADE)
     # edificio = models.IntegerField()
     piso = models.IntegerField()
-    retira = models.CharField(max_length=200, blank=False, null=False)
+    retira = models.CharField(max_length=10, blank=False, null=False)
     preparador = models.ForeignKey(Personal, on_delete=models.CASCADE, blank=True, null=True, related_name="Preparador")
     bodega = models.ForeignKey(Bodega, on_delete=models.CASCADE, blank=True, null=True)
     estado_solicitud = models.CharField(max_length=50, blank=True, null=True, choices=ESTADOS_CHOICES, default=estado_1)

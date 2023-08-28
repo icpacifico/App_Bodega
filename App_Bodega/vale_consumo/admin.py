@@ -6,7 +6,7 @@ from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter, landscape
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Spacer, PageBreak
 from reportlab.lib.styles import getSampleStyleSheet
-from .models import Unidad_Negocio, Centro_Costo, Bodega, Categoria, Recurso, Solicitud, Solicitud_Recurso, Personal
+from .models import Unidad_Negocio, Centro_Costo, Bodega, Categoria, Recurso, Solicitud, Solicitud_Recurso, Personal, Unidade
 from usuario.models import UserProfile  # Preparador,
 
 
@@ -101,7 +101,10 @@ class CategoriaAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     )
     resources_class = CategoriaResource
 
+# UNIDADES
 
+class UnidadesAdmin(admin.ModelAdmin):
+    list_display = ('id', 'nombre_unidad', 'abrv')
 # RECURSO
 class RecursoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = (
@@ -242,6 +245,7 @@ admin.site.register(Centro_Costo, Cetro_CostoAdmin)
 admin.site.register(Bodega, BodegaAdmin)
 admin.site.register(Personal, PersonalAdmin)
 admin.site.register(Categoria, CategoriaAdmin)
+admin.site.register(Unidade, UnidadesAdmin)
 admin.site.register(Recurso, RecursoAdmin)
 admin.site.register(Solicitud, SolicitudAdmin)
 admin.site.register(Solicitud_Recurso, Solicitud_RecursoAdmin)
