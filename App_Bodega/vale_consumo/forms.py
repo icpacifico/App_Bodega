@@ -34,6 +34,7 @@ class SolicitudForm(ModelForm):
             'retira': TextInput(
                 attrs={
                     'class': 'form-control ',
+                    'placeholder':'Ingresar Rut: sin puntos y con guión',
                 }
             )
         }
