@@ -108,7 +108,7 @@ class UnidadesAdmin(admin.ModelAdmin):
 # RECURSO
 class RecursoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = (
-        'id',
+        'cod_recurso',
         'categoria_recurso',
         'nombre_recurso',
         'unidad',
