@@ -1,0 +1,13 @@
+# Ignorar archivos de configuración local
+settings.py
+*.sqlite3
+
+
+# Ignorar el entorno virtual local
+Scripts
+
+
+# Ignorar los archivos de migraciones locales
+App_Bodega/vale_consumo/migrations
+App_Bodega/usuario/migrations
+App_Bodega/inventario/migrations
