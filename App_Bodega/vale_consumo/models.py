@@ -86,7 +86,7 @@ class Unidade(models.Model):
 
 # MODELO:RECURSO
 class Recurso(models.Model):
-    cod_recurso = models.CharField(primary_key=True, max_length=10)
+    cod_recurso = models.CharField(max_length=20)
     categoria_recurso = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     nombre_recurso = models.CharField(max_length=100, blank=False, null=False)
     unidad = models.ForeignKey(Unidade, on_delete=models.CASCADE)
